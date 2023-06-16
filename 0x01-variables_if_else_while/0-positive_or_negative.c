@@ -1,9 +1,8 @@
 #include <stdlib.h>
 #include <time.h>
-/* more headers goes there */
 #include <stdio.h>
 
-/* betty style doc for function main goes there */
+
 /**
  * Main - Entry point
  *
@@ -28,6 +27,6 @@ int main(void)
 		printf("%i is zero\n", n);
 	}
 	else 
-		printf("%i is negative\n",n);
+		printf("%i is negative\n", n);
 	return (0);
 }
