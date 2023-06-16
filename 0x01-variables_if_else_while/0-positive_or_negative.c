@@ -4,7 +4,7 @@
 
 
 /**
- * Main - Entry point
+ * main - Entry point
  *
  * Description: print values of n status; zero, positive or negative
  *
