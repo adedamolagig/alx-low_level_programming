@@ -7,7 +7,6 @@
  *
  * Return: pointer to resulting string @dest
 */
-#include <stddef.h> // for size_t
 
 char *_strcat(char *dest, const char *src) {
     // Find the end of the dest string
