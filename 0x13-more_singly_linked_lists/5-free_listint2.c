@@ -19,6 +19,4 @@ void free_listint2(listint_t **head)
 		/* Free up memory of the current node*/
 		free(current);
 	}
-	/* Set the head to NULL  at the end of the function*/
-	*head = NULL;
 }
