@@ -4,7 +4,7 @@
 obj_dir="/root/alx-low_level_programming/0x09-static_libraries"
 
 # Name of the output static library
-output_library="libmy.a"
+output_library="liball.a"
 
 # Create a list of all object files in the directory
 object_files=("$obj_dir"/*.o)
