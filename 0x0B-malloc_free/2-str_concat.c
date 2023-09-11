@@ -33,7 +33,7 @@ char *str_concat(char *s1, char *s2)
 	{
 		s2_len++;
 	}
-	/* Allocate memory for the concatenates string, including space for the null terminator */
+	/* Allocate memory for concatenates string, including null terminator */
 	concatenated_str = (char *)malloc(sizeof(char) * (s1_len + s2_len + 1));
 
 	/* Check if memory allocated failed */
