@@ -1,54 +1,72 @@
-#include "variadic_functions"
+#include "variadic_functions.h"
+#include <stdio.h>
+#include <stdarg.h>
 
 /**
- * print_all - Prints anything according to the specified format.
- * @format: A format string containing format specifiers.
- * 		- 'c' for char
- * 		- 'i' for integer
- * 		- 'f' for float
- * 		- 's' for string (if NULL, print "(nil)")
+ * print_all - Prints different things according to a code.
+ * @format: A code that tells the box what to print.
+ *            - 'c' for a single character
+ *            - 'i' for a number (integer)
+ *            - 'f' for a number with decimal points (float)
+ *            - 's' for a word (string)
  *
  * Return: void
  */
 void print_all(const char * const format, ...)
 {
-	int i = 0;
-	char *str, *sep = "";
+    va_list args;  // This is like a list of instructions you give to the box.
+    char *separator = "";  // This helps separate different things that the box prints.
+    unsigned int i = 0;  // This keeps track of which instruction we're using.
 
-	va_list list;
+    va_start(args, format);  // We start telling the box what to do.
 
-	va_start(list, format);
+    while (format && format[i])  // As long as we have instructions and we're not done yet...
+    {
+        if (i > 0)
+            printf("%s", separator);  // We use a comma or space to separate things.
 
-	if (format)
-	{
-		while (format[i])
-		{
-			switch (format[i])
-			{
-				case 'c':
-					printf("%s%c", sep, va_arg(list, int));
-					break;
-				case 'i':
-					printf("%s%d", sep, va_arg(list, int));
-					break;
-				case 'f':
-					printf("%s%f", sep, va_arg(list, double));
-					break;
-				case 's':
-					str = va_arg(list, char *);
-					if (!str)
-						str = "(nil)";
-					printf("%s%s", sep, str);
-					break;
-				default:
-					i++;
-					continue;
-			}
-			sep = ", ";
-			i++;
-		}
-	}
+        switch (format[i])  // Depending on the instruction...
+        {
+            case 'c':  // If it's 'c', we print a single character.
+                printf("%c", va_arg(args, int));  // We take the next instruction from the list.
+                break;
 
-	printf("\n");
-	va_end(list);
+            case 'i':  // If it's 'i', we print a number (integer).
+                printf("%d", va_arg(args, int));  // Again, we take the next instruction.
+                break;
+
+            case 'f':  // If it's 'f', we print a number with decimal points (float).
+                printf("%f", va_arg(args, double));  // The box knows what to do.
+                break;
+
+            case 's':  // If it's 's', we print a word (string).
+                {
+                    char *str = va_arg(args, char *);  // We get the word from the list.
+                    if (!str)
+                        str = "(nil)";  // If there's no word, we say "(nil)".
+                    printf("%s", str);  // The box prints the word.
+                }
+                break;
+
+            default:
+                i++;  // If it's something we don't understand, we skip it.
+                continue;
+        }
+
+        separator = ", ";  // For the next thing, we'll use a comma and space.
+        i++;  // Let's move on to the next instruction.
+    }
+
+    va_end(args);  // We're done telling the box what to do.
+    printf("\n");  // We tell the box to go to the next line.
 }
+
+int main()
+{
+    // Now, let's use the magic box:
+    print_all("csfi", 'H', "Hello", 42, 3.14);
+    // This will print: "H, Hello, 42, 3.140000"
+    
+    return (0);
+}
+
