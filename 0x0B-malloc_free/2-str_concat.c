@@ -1,59 +1,49 @@
-#include "main.h"
 #include <stdlib.h>
+#include "main.h"
 
 /**
- * str_concat - Concatenates two strings.
- * @s1: first string to be concatenated.
- * @s2: second string to be concatenated.
+ * *str_concat - concatenates two strings
+ * @s1: string to concatenate
+ * @s2: other string to concatenate
  *
- * Return: pointer to the newly allocated space in memory
- * containing the concatenated strings, or NULL on failure.
+ * Return: pointer to the new string created (Success), or NULL (Error)
  */
 char *str_concat(char *s1, char *s2)
 {
-	char *concatenated_str;
-	int s1_len = 0, s2_len = 1, i, j;
+	char *s3;
+	unsigned int i = 0, j = 0, len1 = 0, len2 = 0;
 
-	if (s1 == NULL)
-	{
-		s1 = "";
-	}
+	while (s1 && s1[len1])
+		len1++;
+	while (s2 && s2[len2])
+		len2++;
 
-	if (s2 == NULL)
-	{
-		s2 = "";
-	}
-
-	/* Calculate the lengths of s1 and s2 */
-	while (s1[s1_len])
-	{
-		s1_len++;
-	}
-	while (s2[s2_len])
-	{
-		s2_len++;
-	}
-	/* Allocate memory for concatenates string, including null terminator */
-	concatenated_str = (char *)malloc(sizeof(char) * (s1_len + s2_len + 1));
-
-	/* Check if memory allocated failed */
-	if (concatenated_str == NULL)
-	{
+	s3 = malloc(sizeof(char) * (len1 + len2 + 1));
+	if (s3 == NULL)
 		return (NULL);
-	}
-	/* Copy the characters from s1 to concatenated_str */
-	for (i = 0; i < s1_len; i++)
+
+	i = 0;
+	j = 0;
+
+	if (s1)
 	{
-		concatenated_str[i] = s1[i];
+		while (i < len1)
+		{
+			s3[i] = s1[i];
+			i++;
+		}
 	}
 
-	/*Concatenate the characters from s2 to concatenated_str */
-	for (j = 0; j < s2_len; j++)
+	if (s2)
 	{
-		concatenated_str[i] = s2[j];
-		i++;
+		while (i < (len1 + len2))
+		{
+			s3[i] = s2[j];
+			i++;
+			j++;
+		}
 	}
-	/* add null terminator to the end of the concatenates string*/
-	concatenated_str[i] = '\0';
-	return (concatenated_str);
+	s3[i] = '\0';
+
+	return (s3);
 }
