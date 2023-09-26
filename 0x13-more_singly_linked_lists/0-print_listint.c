@@ -12,7 +12,7 @@ size_t print_listint(const listint_t *h)
 	size_t count = 0;
 
 	/* loppe through */
-	while (h != NULL)
+	while (h)
 	{
 		/* Prints the data in the current node */
 		printf("%d \n", h->n);
