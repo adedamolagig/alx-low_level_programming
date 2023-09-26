@@ -2,8 +2,8 @@
 
 /**
  * add_nodeint - adds a new node at beginning of listint_t
- * @*head: head
- * @n:
+ * @head: head pointer for first node
+ * @n: data to insert in new node.
  *
  * Return: address on Success and NULL on failed
  */
